@@ -1,0 +1,25 @@
+- title: Services
+  url: /services/
+  children:
+    - title: Technology & AI
+      url: /services/technology/
+    - title: Advocacy & Investigation
+      url: /services/advocacy/
+    - title: Research & Statistics
+      url: /services/research/
+    - title: Education
+      url: /services/education/
+
+- title: Work
+  url: /case-studies/
+  active_paths:
+    - /work/
+    - /case-studies/
+
+- title: About
+  url: /about/
+  active_paths:
+    - /about/
+
+- title: Contact
+  url: /intake

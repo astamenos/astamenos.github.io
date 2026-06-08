@@ -1,0 +1,67 @@
+{% comment %}
+  Playlist carousel include.
+
+  Parameters:
+    include.data_source  — key in site.data pointing to a .yml file (default: "playlists")
+    include.id           — HTML id prefix for the carousel element (default: "playlists")
+
+  Each entry in the data file:
+    embed_url:   Apple Music / Spotify iframe src
+    title:       playlist name
+    description: short blurb
+    height:      iframe height in px (optional, default 450)
+
+  Iframes use data-src (not src) — playlist-carousel.js swaps them on slide activation.
+  Include assets/js/playlist-carousel.js in your layout or page to activate.
+{% endcomment %}
+
+{% assign _playlists = site.data[include.data_source | default: 'playlists'] %}
+{% assign _carousel_id = include.id | default: 'playlists' %}
+
+<div class="playlist-carousel" id="{{ _carousel_id }}-carousel"
+  aria-label="{{ _carousel_id | capitalize }} playlist carousel">
+
+  <div class="playlist-carousel-track" aria-live="polite">
+    {% for pl in _playlists %}
+    <div class="playlist-carousel-slide" role="group"
+      aria-label="Playlist {{ forloop.index }} of {{ _playlists.size }}">
+      <div class="card--formula">
+        <div class="card--formula__interior playlist-card">
+
+          <iframe allow="autoplay *; encrypted-media *;" frameborder="0"
+            height="{{ pl.height | default: 450 }}"
+            class="playlist-iframe"
+            data-src="{{ pl.embed_url }}"
+            title="{{ pl.title }}"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation">
+          </iframe>
+
+          {% if pl.title or pl.description %}
+          <div class="playlist-meta">
+            {% if pl.title %}<p class="playlist-title">{{ pl.title }}</p>{% endif %}
+            {% if pl.description %}<p class="card-desc">{{ pl.description }}</p>{% endif %}
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if _playlists.size > 1 %}
+  <div class="playlist-carousel-controls">
+    <button class="carousel-btn playlist-btn--prev" aria-label="Previous playlist">&#8592;</button>
+    <span class="playlist-carousel-count">1 / {{ _playlists.size }}</span>
+    <button class="carousel-btn playlist-btn--next" aria-label="Next playlist">&#8594;</button>
+  </div>
+
+  <div class="carousel-dots playlist-carousel-dots" role="tablist" aria-label="Playlist navigation">
+    {% for pl in _playlists %}
+    <button class="carousel-dot{% if forloop.first %} active{% endif %}" role="tab"
+      aria-label="Playlist {{ forloop.index }}"></button>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
