@@ -1,0 +1,22 @@
+title: Apostolos Stamenos
+author: Apostolos Stamenos
+description: >
+  Independent consulting for survivors, senior citizens, veterans,
+  and institutionally betrayed populations.
+
+url: "https://astamenos.github.io"
+baseurl: ""
+
+# Social URLs — referenced in _includes/footer.html as site.<key>
+github_url: "https://github.com/astamenos"
+linkedin_url: "https://linkedin.com/in/astamenos"
+tutoring_url: ""
+substack_url: ""
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - docs/
+  - LICENSE
+  - README.md
