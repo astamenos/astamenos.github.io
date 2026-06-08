@@ -1,0 +1,70 @@
+---
+layout: default
+---
+<div id="progress-bar"></div>
+
+<header class="svc-hero">
+  <a class="post-back" href="{{ page.back_url | default: '/services/' | relative_url }}">Back</a>
+  <div class="svc-hero-inner{% unless page.headshot %} svc-hero-inner--single{% endunless %}">
+    <div class="svc-hero-text">
+      <p class="post-category">{{ page.category }}</p>
+      <h1 class="svc-title">{{ page.title }}</h1>
+      <p class="hero-tagline">{{ page.tagline | markdownify }}</p>
+      <p class="svc-lede">{{ page.lede }}</p>
+      <div class="svc-tags">
+        {% for tag in page.tags %}
+        <div class="hero-cta"><a href="#{{ tag }}" class="btn">{{ tag }}</a></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if page.headshot %}
+    <div class="hex-portrait">
+      <img src="{{ page.headshot | relative_url }}" alt="{{ page.headshot_alt }}" />
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<div class="page-toc-wrap page-toc-wrap--svc">
+  <article class="svc-body">
+    <div class="post-body">
+      {{ content }}
+    </div>
+  </article>
+  {% include toc.html %}
+</div>
+
+<div class="svc-body">
+  {% if page.who %}
+  <section class="svc-section">
+    <div class="svc-section-label">
+      <p>Who It's For</p>
+    </div>
+    <div class="svc-section-content">
+      {{ page.who | markdownify }}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="svc-section svc-section--cta">
+    <div class="svc-section-label">
+      <p>Get Started</p>
+    </div>
+    <div class="svc-section-content">
+      <p class="svc-cta-body">{{ page.cta_body | default: 'Reach out and we can find a time to talk through what you need.' }}</p>
+      <a href="{{ page.cta_url | default: '/intake' | relative_url }}" class="btn">
+        {{ page.cta_label | default: 'Get in Touch' }}
+      </a>
+    </div>
+  </section>
+</div>
+
+<script src="/assets/js/toc.js" defer></script>
+<script>
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (scrolled / total * 100) + '%';
+  });
+</script>

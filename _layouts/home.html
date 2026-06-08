@@ -1,0 +1,215 @@
+---
+layout: default
+---
+
+{% include hero.html %}
+
+<!-- ── Who This Is For ────────────────────────────────────────────────────── -->
+<section id="audience">
+  <div class="about-header">
+    <p class="section-label">Who This Is For</p>
+    <h2 class="about-heading">If any of this sounds like you, you're in the right place.</h2>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <h3>Survivors of coercive control</h3>
+      <p>You need to document what happened in a way that institutions will actually take seriously — and protect
+        yourself from digital surveillance while you do it.</p>
+    </div>
+    <div class="audience-card">
+      <h3>Whistleblowers &amp; federal employees</h3>
+      <p>You're pushing back against agency misconduct and need technical, statistical, or records-management support
+        from someone who has worked inside the system.</p>
+    </div>
+    <div class="audience-card">
+      <h3>Advocates &amp; nonprofits</h3>
+      <p>You serve people navigating broken institutions and want AI-literate tooling, research, or investigation
+        capacity you can trust with sensitive cases.</p>
+    </div>
+    <div class="audience-card">
+      <h3>Researchers &amp; clinicians</h3>
+      <p>You study institutional betrayal, personality pathology, or public-health harm and need a collaborator fluent
+        in both statistics and the human stakes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── About / Stats ──────────────────────────────────────────────────────── -->
+<!-- <section id="about">
+  <div class="about-header">
+    <p class="section-label">By the Numbers</p>
+    <h2 class="about-heading">{{ page.about_heading }}</h2>
+  </div>
+  <div class="stats-grid">
+
+    {% if page.stats.years_experience %}
+    <div class="stat">
+      <span class="stat-value">{{ page.stats.years_experience }}</span>
+      <span class="stat-label">Years of Experience</span>
+    </div>
+    {% endif %}
+
+    {% if page.stats.publications %}
+    <div class="stat">
+      <span class="stat-value">{{ page.stats.publications }}</span>
+      <span class="stat-label">Publications &amp; Papers</span>
+    </div>
+    {% endif %}
+
+    {% if page.stats.students_tutored %}
+    <div class="stat">
+      <span class="stat-value">{{ page.stats.students_tutored }}</span>
+      <span class="stat-label">Students Tutored</span>
+    </div>
+    {% endif %}
+
+    {% if page.stats.clients_consulted %}
+    <div class="stat">
+      <span class="stat-value">{{ page.stats.clients_consulted }}</span>
+      <span class="stat-label">Consulting Engagements</span>
+    </div>
+    {% endif %}
+
+    {% if page.stats.agencies %}
+    <div class="stat">
+      <span class="stat-value">{{ page.stats.agencies }}</span>
+      <span class="stat-label">{{ page.stats.agencies_note | default: "Agencies &amp; Orgs" }}</span>
+    </div>
+    {% endif %}
+
+    {% if page.stats.phd_program %}
+    <div class="stat">
+      <span class="stat-value">{{ page.stats.phd_program }}</span>
+      <span class="stat-label">PhD Program</span>
+    </div>
+    {% endif %}
+
+  </div>
+</section> -->
+
+<!-- ── Values ─────────────────────────────────────────────────────────────── -->
+<section id="values">
+  <div class="testimonials-header">
+    <div>
+      <p class="section-label">What I Live By</p>
+      <h2 class="testimonials-heading">Values</h2>
+    </div>
+  </div>
+
+  <div class="values-grid">
+    {% for val in site.data.values %}
+    <div class="values-card">
+      <div class="values-card__inner">
+        <div class="values-card__front">
+          <div class="values-card__surface">
+            <i class="{{ val.icon }} values-card__icon"></i>
+            <span class="values-card__name">{{ val.title | markdownify }}</span>
+          </div>
+        </div>
+        <div class="values-card__back">
+          <div class="values-card__surface">
+            <p class="values-card__desc">{{ val.description | markdownify }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ── Services / Expertise ───────────────────────────────────────────────── -->
+<section id="services">
+  <div class="work-header">
+    <div>
+      <p class="section-label">What I Offer</p>
+      <h2 class="work-heading">Expertise</h2>
+    </div>
+  </div>
+
+  <div class="testimonials-grid">
+    {% for service in site.services %}
+    <div class="card--formula">
+      <div class="card--formula__interior">
+        {% if service.icon %}
+        <div class="svc-card-icon"><i class="fa-solid {{ service.icon }}"></i></div>
+        {% endif %}
+        <div class="svc-card-body">
+          <h3 class="card-title">{{ service.title }}</h3>
+          <p class="card-desc">{{ service.description }}</p>
+          <a href="{{ service.url }}" class="card-link">{{ service.cta_label | default: 'Learn More' }} →</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ── Work ───────────────────────────────────────────────────────────────── -->
+<section id="work">
+  <div class="work-header">
+    <div>
+      <p class="section-label">Selected Work</p>
+      <h2 class="work-heading">Case Studies</h2>
+    </div>
+    <span class="work-count">{{ site.case_studies.size }} pieces</span>
+  </div>
+
+  <div class="testimonials-grid">
+    {% for case in site.case_studies %}
+    <div class="card--formula">
+      <div class="card--formula__interior">
+        <p class="card-tag">{{ case.tag }}</p>
+        <h3 class="card-title">{{ case.title }}</h3>
+        <p class="card-desc">{{ case.description }}</p>
+        <a href="{{ case.url }}" class="card-link">Read More →</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ── Testimonials ───────────────────────────────────────────────────────── -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <div>
+      <p class="section-label">What Clients Say</p>
+      <h2 class="testimonials-heading">Testimonials</h2>
+      <p class="testimonials-context"
+        style="margin-top:0.5rem;font-size:0.8125rem;color:var(--muted);letter-spacing:0.01em;font-style:italic;">These
+        testimonials are from federal and corporate engagements. Survivor and advocacy work is confidential by design.
+      </p>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn carousel-btn--prev" aria-label="Previous testimonial">&#8592;</button>
+      <span class="carousel-count">1 / {{ site.data.testimonials.size }}</span>
+      <button class="carousel-btn carousel-btn--next" aria-label="Next testimonial">&#8594;</button>
+    </div>
+  </div>
+
+  <div class="carousel" aria-live="polite" aria-label="Testimonials">
+    <div class="carousel-track">
+      {% for ref in site.data.testimonials %}
+      <div class="carousel-slide" role="group"
+        aria-label="Testimonial {{ forloop.index }} of {{ site.data.testimonials.size }}">
+        <div class="card--formula">
+          <div class="card--formula__interior">
+            <p class="card-tag">{{ ref.title }}</p>
+            <blockquote>
+              <p class="card-desc">{{ ref.description }}</p>
+              <cite>— {{ ref.reference }}</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="carousel-dots" role="tablist" aria-label="Testimonial navigation">
+    {% for ref in site.data.testimonials %}
+    <button class="carousel-dot{% if forloop.first %} active{% endif %}" role="tab"
+      aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+      aria-label="Testimonial {{ forloop.index }}"></button>
+    {% endfor %}
+  </div>
+</section>
