@@ -8,6 +8,10 @@ description: >
 url: "https://astamenos.github.io"
 baseurl: ""
 
+# Process standalone pages in _pages (each file sets its own permalink).
+include:
+  - _pages
+
 # Social URLs — referenced in _includes/footer.html as site.<key>
 github_url: "https://github.com/astamenos"
 linkedin_url: "https://linkedin.com/in/astamenos"

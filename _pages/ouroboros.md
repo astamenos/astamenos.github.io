@@ -1,5 +1,6 @@
 ---
 title: OUROBOROS
+permalink: /ouroboros/
 description: A carefully researched cybernetic exploration of seemingly infinite positive feedback loops I lived through.
 layout: mission
 category: About
