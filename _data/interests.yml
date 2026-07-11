@@ -1,0 +1,20 @@
+# Interests teaser tiles on the homepage. Each links to /interests/#slug.
+- title: Statistics
+  slug: statistics
+  hint: Bayesian methods, causal inference, and the discipline of quantifying what we do not know.
+
+- title: Psychopathology
+  slug: psychopathology
+  hint: Personality pathology and the HiTOP model. How harm patterns in people, and how we measure it.
+
+- title: Cybernetics
+  slug: cybernetics
+  hint: Feedback, control, and systems that regulate themselves. Or fail to.
+
+- title: Mathematics
+  slug: mathematics
+  hint: The structure underneath the methods. Proof as a form of honesty.
+
+- title: Technology
+  slug: technology
+  hint: Federal-grade systems, machine learning, and tools that hold up under real stakes.

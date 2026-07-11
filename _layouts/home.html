@@ -4,95 +4,40 @@ layout: default
 
 {% include hero.html %}
 
-<!-- ── Who This Is For ────────────────────────────────────────────────────── -->
-<section id="audience">
-  <div class="about-header">
-    <p class="section-label">Who This Is For</p>
-    <h2 class="about-heading">If any of this sounds like you, you're in the right place.</h2>
-  </div>
-  <div class="audience-grid">
-    <div class="audience-card">
-      <h3>Survivors of coercive control</h3>
-      <p>You need to document what happened in a way that institutions will actually take seriously — and protect
-        yourself from digital surveillance while you do it.</p>
-    </div>
-    <div class="audience-card">
-      <h3>Whistleblowers &amp; federal employees</h3>
-      <p>You're pushing back against agency misconduct and need technical, statistical, or records-management support
-        from someone who has worked inside the system.</p>
-    </div>
-    <div class="audience-card">
-      <h3>Advocates &amp; nonprofits</h3>
-      <p>You serve people institutions have already failed and need AI-literate tooling, research, or investigation
-        capacity you can trust with sensitive cases.</p>
-    </div>
-    <div class="audience-card">
-      <h3>Researchers &amp; clinicians</h3>
-      <p>You study institutional betrayal, personality pathology, or public-health harm and need a collaborator fluent
-        in both statistics and the human stakes.</p>
-    </div>
+<!-- ── Bio ────────────────────────────────────────────────────────────────── -->
+<section id="bio" class="fade-in">
+  <p class="section-label">Observation Log 01 · Who</p>
+  <div class="bio-body">
+    {{ page.bio | markdownify }}
   </div>
 </section>
 
-<!-- ── About / Stats ──────────────────────────────────────────────────────── -->
-<!-- <section id="about">
-  <div class="about-header">
-    <p class="section-label">By the Numbers</p>
-    <h2 class="about-heading">{{ page.about_heading }}</h2>
-  </div>
-  <div class="stats-grid">
-
-    {% if page.stats.years_experience %}
-    <div class="stat">
-      <span class="stat-value">{{ page.stats.years_experience }}</span>
-      <span class="stat-label">Years of Experience</span>
-    </div>
-    {% endif %}
-
-    {% if page.stats.publications %}
-    <div class="stat">
-      <span class="stat-value">{{ page.stats.publications }}</span>
-      <span class="stat-label">Publications &amp; Papers</span>
-    </div>
-    {% endif %}
-
-    {% if page.stats.students_tutored %}
-    <div class="stat">
-      <span class="stat-value">{{ page.stats.students_tutored }}</span>
-      <span class="stat-label">Students Tutored</span>
-    </div>
-    {% endif %}
-
-    {% if page.stats.clients_consulted %}
-    <div class="stat">
-      <span class="stat-value">{{ page.stats.clients_consulted }}</span>
-      <span class="stat-label">Consulting Engagements</span>
-    </div>
-    {% endif %}
-
-    {% if page.stats.agencies %}
-    <div class="stat">
-      <span class="stat-value">{{ page.stats.agencies }}</span>
-      <span class="stat-label">{{ page.stats.agencies_note | default: "Agencies &amp; Orgs" }}</span>
-    </div>
-    {% endif %}
-
-    {% if page.stats.phd_program %}
-    <div class="stat">
-      <span class="stat-value">{{ page.stats.phd_program }}</span>
-      <span class="stat-label">PhD Program</span>
-    </div>
-    {% endif %}
-
-  </div>
-</section> -->
-
-<!-- ── Values ─────────────────────────────────────────────────────────────── -->
-<section id="values">
+<!-- ── Interests teaser ───────────────────────────────────────────────────── -->
+<section id="interests-teaser" class="fade-in">
   <div class="testimonials-header">
     <div>
-      <p class="section-label">What I Live By</p>
-      <h2 class="testimonials-heading">Values</h2>
+      <p class="section-label">Observation Log 02 · What</p>
+      <h2 class="about-heading">What I think about</h2>
+    </div>
+    <a href="{{ '/interests/' | relative_url }}" class="btn btn--ghost">Full field notes</a>
+  </div>
+
+  <div class="interests-grid">
+    {% for item in site.data.interests %}
+    <a class="interest-tile" href="{{ '/interests/' | relative_url }}#{{ item.slug }}">
+      <span class="interest-tile__name">{{ item.title }}</span>
+      <span class="interest-tile__hint">{{ item.hint }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ── Values ─────────────────────────────────────────────────────────────── -->
+<section id="values" class="fade-in">
+  <div class="testimonials-header">
+    <div>
+      <p class="section-label">Observation Log 03 · Why</p>
+      <h2 class="testimonials-heading">What I live by</h2>
     </div>
   </div>
 
@@ -102,7 +47,7 @@ layout: default
       <div class="values-card__inner">
         <div class="values-card__front">
           <div class="values-card__surface">
-            <i class="{{ val.icon }} values-card__icon"></i>
+            <i class="{{ val.icon }} values-card__icon" aria-hidden="true"></i>
             <span class="values-card__name">{{ val.title | markdownify }}</span>
           </div>
         </div>
@@ -117,67 +62,14 @@ layout: default
   </div>
 </section>
 
-<!-- ── Services / Expertise ───────────────────────────────────────────────── -->
-<section id="services">
-  <div class="work-header">
-    <div>
-      <p class="section-label">What I Offer</p>
-      <h2 class="work-heading">Expertise</h2>
-    </div>
-  </div>
-
-  <div class="testimonials-grid">
-    {% for service in site.services %}
-    <div class="card--formula">
-      <div class="card--formula__interior">
-        {% if service.icon %}
-        <div class="svc-card-icon"><i class="fa-solid {{ service.icon }}"></i></div>
-        {% endif %}
-        <div class="svc-card-body">
-          <h3 class="card-title">{{ service.title }}</h3>
-          <p class="card-desc">{{ service.description }}</p>
-          <a href="{{ service.url }}" class="card-link">{{ service.cta_label | default: 'Learn More' }} →</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
-<!-- ── Work ───────────────────────────────────────────────────────────────── -->
-<section id="work">
-  <div class="work-header">
-    <div>
-      <p class="section-label">Selected Work</p>
-      <h2 class="work-heading">Case Studies</h2>
-    </div>
-    <span class="work-count">{{ site.case_studies.size }} pieces</span>
-  </div>
-
-  <div class="testimonials-grid">
-    {% for case in site.case_studies %}
-    <div class="card--formula">
-      <div class="card--formula__interior">
-        <p class="card-tag">{{ case.tag }}</p>
-        <h3 class="card-title">{{ case.title }}</h3>
-        <p class="card-desc">{{ case.description }}</p>
-        <a href="{{ case.url }}" class="card-link">Read More →</a>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
 <!-- ── Testimonials ───────────────────────────────────────────────────────── -->
-<section id="testimonials">
+{% if site.data.testimonials.size > 0 %}
+<section id="testimonials" class="fade-in">
   <div class="testimonials-header">
     <div>
-      <p class="section-label">What Clients Say</p>
-      <h2 class="testimonials-heading">Testimonials</h2>
-      <p class="testimonials-context"
-        style="margin-top:0.5rem;font-size:0.8125rem;color:var(--muted);letter-spacing:0.01em;font-style:italic;">These
-        testimonials are from federal and corporate engagements. Survivor and advocacy work is confidential by design.
-      </p>
+      <p class="section-label">Observation Log 04 · Word</p>
+      <h2 class="testimonials-heading">In others' words</h2>
+      <p class="testimonials-context">From federal and corporate engagements. Survivor and advocacy work stays confidential by design.</p>
     </div>
     <div class="carousel-controls">
       <button class="carousel-btn carousel-btn--prev" aria-label="Previous testimonial">&#8592;</button>
@@ -196,7 +88,7 @@ layout: default
             <p class="card-tag">{{ ref.title }}</p>
             <blockquote>
               <p class="card-desc">{{ ref.description }}</p>
-              <cite>— {{ ref.reference }}</cite>
+              <cite>{{ ref.reference }}</cite>
             </blockquote>
           </div>
         </div>
@@ -213,3 +105,4 @@ layout: default
     {% endfor %}
   </div>
 </section>
+{% endif %}
