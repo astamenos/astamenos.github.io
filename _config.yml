@@ -1,66 +1,22 @@
 title: Apostolos Stamenos
 author: Apostolos Stamenos
 description: >
-  Independent consulting for survivors, senior citizens, veterans,
-  and institutionally betrayed populations.
+  Apostolos Stamenos. Statistics, systems, and stories. Federal
+  technology, biostatistics, personality psychopathology, and the
+  writing that ties them together.
 
 url: "https://astamenos.github.io"
 baseurl: ""
+
+# Process standalone pages in _pages (each file sets its own permalink).
+include:
+  - _pages
 
 # Social URLs — referenced in _includes/footer.html as site.<key>
 github_url: "https://github.com/astamenos"
 linkedin_url: "https://linkedin.com/in/astamenos"
 tutoring_url: ""
 substack_url: ""
-
-services:
-  - title: Technology & AI
-    icon: fa-microchip
-    description: >
-      Federal IT, FedRAMP-compliant automation, ML tooling, data pipelines, and AI strategy
-      for mission-critical programs. Hands-on with HHS, CDC, and ASPR transitions.
-    url: /services/technology/
-    cta_label: Learn More
-
-  - title: Advocacy & Investigation
-    icon: fa-magnifying-glass
-    description: >
-      Technical and statistical support for survivors, whistleblowers, and attorneys.
-      Digital safety audits, records documentation, coercive control pattern analysis.
-    url: /services/advocacy/
-    cta_label: Learn More
-
-  - title: Research & Statistics
-    icon: fa-chart-line
-    description: >
-      Biostatistics and psychometrics with HiTOP training from the University of Minnesota.
-      Effect sizes, confidence intervals, and plain-language translation for researchers, clinicians, and domain experts.
-    url: /services/research/
-    cta_label: Learn More
-
-  - title: Education
-    icon: fa-graduation-cap
-    description: >
-      One-on-one instruction in statistics, R, data analysis, and research methods.
-      Tailored for graduate students, clinicians, and professionals at any level.
-    url: /services/education/
-    cta_label: Learn More
-
-case_studies:
-  - tag: Federal Technology
-    title: HHS Protect & Vaccines.gov Migration
-    description: >
-      Led operational continuity for two mission-critical HHS systems during transfer
-      to CDC and ASPR. Engineered automation bridges that kept data pipelines and
-      help desk services running without interruption.
-    url: /case-studies/hhs-migration/
-
-  - tag: Data Strategy
-    title: OCDO Website Modernization
-    description: >
-      Proposed and prototyped data platform solutions for the HHS Office of the Chief
-      Data Officer. Recommended Salesforce adoption, which was subsequently implemented.
-    url: /case-studies/ocdo/
 
 exclude:
   - Gemfile
@@ -69,3 +25,4 @@ exclude:
   - docs/
   - LICENSE
   - README.md
+  - CLAUDE.md

@@ -1,25 +1,17 @@
-- title: Services
-  url: /services/
-  children:
-    - title: Technology & AI
-      url: /services/technology/
-    - title: Advocacy & Investigation
-      url: /services/advocacy/
-    - title: Research & Statistics
-      url: /services/research/
-    - title: Education
-      url: /services/education/
+- title: CV
+  url: /cv/
 
-- title: Work
-  url: /case-studies/
-  active_paths:
-    - /work/
-    - /case-studies/
+- title: Interests
+  url: /interests/
 
-- title: About
-  url: /about/
-  active_paths:
-    - /about/
+- title: OUROBOROS
+  url: /ouroboros/
 
-- title: Contact
-  url: /intake
+- title: Whistleblowing
+  url: /whistleblowing/
+
+- title: Reading
+  url: /reading/
+
+- title: Listening
+  url: /listening/
