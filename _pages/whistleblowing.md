@@ -41,8 +41,8 @@ Reporting wrongdoing and surviving the retaliation that can follow is isolating 
 
 A few public resources:
 
-- **[Center for Institutional Courage](https://www.institutionalcourage.org)** — Jennifer Freyd's nonprofit; research and resources on institutional betrayal and courage.
-- **[Whistleblowers of America](https://www.whistleblowersofamerica.org)** — peer support for people who report wrongdoing and face retaliation.
+- **[Center for Institutional Courage](https://www.institutionalcourage.org)**. Jennifer Freyd's nonprofit; research and resources on institutional betrayal and courage.
+- **[Whistleblowers of America](https://www.whistleblowersofamerica.org)**. Peer support for people who report wrongdoing and face retaliation.
 
 This page is advocacy and education, not legal advice. If you are facing retaliation, consult a qualified attorney about your specific situation.
 

@@ -25,3 +25,4 @@ exclude:
   - docs/
   - LICENSE
   - README.md
+  - CLAUDE.md
