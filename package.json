@@ -1,0 +1,11 @@
+{
+  "name": "AS-website",
+  "version": "1.0.0",
+  "description": "Apostolos Stamenos website",
+  "scripts": {
+    "predev": "lsof -ti:35729 | xargs kill -9 2>/dev/null || true",
+    "dev": "bundle exec jekyll serve --livereload",
+    "build": "bundle exec jekyll build",
+    "verify": "bundle exec jekyll build --strict_front_matter --trace"
+  }
+}

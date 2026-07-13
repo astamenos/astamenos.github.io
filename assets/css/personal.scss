@@ -7,39 +7,56 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 :root {
-  --bg0: #0b1220;          // zenith — page ground
-  --bg1: #0f1a2e;          // nadir — section elevation
-  --bg2: #16233d;          // panel
-  --bg3: #1d2d4d;          // raised panel
-  --border: #24334f;
-  --hairline: rgba(125, 211, 252, 0.18);
-  --text: #cbd5e1;
-  --bright: #f1f5f9;
-  --subdued: #94a3b8;
-  --muted: #64748b;
-  --accent: #7dd3fc;       // glacial cyan — where the firm used gold
-  --accent-dim: rgba(125, 211, 252, 0.5);
+  --nav-h: 3.5rem;
+
+  // ── Manuscript palette — garnet jewel + gilt illumination on warm black-brown
+  //    (distinct identity built off the firm-dark baseline)
+  --bg0: #0D0A08;          // warm black-brown page ground
+  --bg-hero: #1A130E;      // warm dark-brown hero band
+  --bg1: #14100C;          // section band (subtle lift off ground)
+  --bg2: #1E1813;          // warm panel
+  --bg3: #29211A;          // raised warm panel
+  --border: #3A2F24;       // warm border
+  --calloutbg: #241C15;
+  --hairline: rgba(177, 147, 93, 0.30);    // gilt hairline
+  --text: #ECE3D2;         // parchment
+  --bright: #FBF6EC;       // bright parchment
+  --subdued: #B6A88F;      // warm taupe
+  --muted: #9C8F79;        // muted sepia (AA on every panel ground)
+  --accent: #8d1325;       // garnet-rose — labels, rules, ornament, buttons, hero jewel
+  --accent-dim: rgba(206, 107, 122, 0.35);
+  --gold-ghost: rgba(206, 107, 122, 0.14);  // garnet glow (button/interaction)
+  --gold-border: #B1935D;                    // aged gilt — card frames, arch illumination
+  --garnet-deep: #A23B4E;                    // deep jewel — large ornament / drop-cap only
+  --accent-2: #D97F8B;     // lighter garnet — links/interaction
+  --accent-2-dim: rgba(217, 127, 139, 0.5);
   --oxide: #e06c5a;        // advocacy pages only
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
-  --font-serif: "Lora", Georgia, serif;
-  // graduated tick rule, telescope setting-circle style
-  --tick-rule: repeating-linear-gradient(
-    to right,
-    var(--hairline) 0 1px, transparent 1px 12px,
-    var(--hairline) 12px 13px, transparent 13px 24px,
-    var(--accent-dim) 24px 25px, transparent 25px 96px
+
+  --font-display: "Lora", Georgia, serif;         // headings, hero name
+  --font-body: "Inter", system-ui, sans-serif;    // labels, eyebrows, buttons, UI
+  --font-mono: "JetBrains Mono", monospace;       // code only
+  --font-serif: "Lora", Georgia, serif;           // body, prose
+
+  // gilded section rule — arch gradient flattened to a straight fade-gold-fade line
+  --tick-rule: linear-gradient(
+    to right, transparent, var(--accent-dim) 12%,
+    var(--accent) 50%, var(--accent-dim) 88%, transparent
   );
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg0: #eef2f7; --bg1: #e5ebf3; --bg2: #dbe3ee; --bg3: #cfd9e8;
-    --border: #b6c3d6; --hairline: rgba(12, 74, 110, 0.25);
-    --text: #24344d; --bright: #0b1220; --subdued: #46587a; --muted: #5b6b85;
-    --accent: #0369a1; --accent-dim: rgba(3, 105, 161, 0.5);
-    --oxide: #b03a2a;
+    --bg0: #f2ede1; --bg1: #eae4d5; --bg2: #e1dac8; --bg3: #d6cdb8;   // aged paper
+    --border: #cbbfa6; --hairline: rgba(122, 92, 20, 0.28);
+    --text: #2b241c; --bright: #14100a; --subdued: #5e5641; --muted: #746a52;
+    --accent: #8f2f40;      // deep garnet on paper — labels, rules, ornament
+    --accent-dim: rgba(143, 47, 64, 0.5);
+    --gold-ghost: rgba(143, 47, 64, 0.12);
+    --gold-border: #9a7d3f;                    // aged gilt on paper
+    --garnet-deep: #7a2334;                    // deep jewel drop-cap on paper
+    --accent-2: #9a3b48;    // garnet link on paper
+    --accent-2-dim: rgba(154, 59, 72, 0.5);
+    --oxide: #a5382a;
   }
 }
 
@@ -55,56 +72,32 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background-color: var(--bg0);
-  background-image:
-    radial-gradient(1px 1px at 12% 28%, rgba(241, 245, 249, 0.35) 0, transparent 100%),
-    radial-gradient(1px 1px at 46% 71%, rgba(241, 245, 249, 0.22) 0, transparent 100%),
-    radial-gradient(1px 1px at 71% 13%, rgba(125, 211, 252, 0.30) 0, transparent 100%),
-    radial-gradient(1px 1px at 88% 54%, rgba(241, 245, 249, 0.25) 0, transparent 100%),
-    radial-gradient(1.5px 1.5px at 33% 89%, rgba(241, 245, 249, 0.18) 0, transparent 100%),
-    radial-gradient(1px 1px at 61% 42%, rgba(241, 245, 249, 0.20) 0, transparent 100%);
-  background-size: 1400px 900px;
+  // foxed-paper tooth — static grayscale grain over the warm ground
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='fox'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fox)' opacity='0.05'/%3E%3C/svg%3E");
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font-serif);
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
-}
-
-@media (prefers-color-scheme: light) {
-  body { background-image: none; }
-}
-
-// telescope-beam cursor glow — main.js sets --cx/--cy on :root
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background: radial-gradient(
-    480px circle at var(--cx, 50vw) var(--cy, 30vh),
-    rgba(125, 211, 252, 0.045),
-    transparent 70%
-  );
-}
-@media (prefers-reduced-motion: reduce), (prefers-color-scheme: light) {
-  body::after { display: none; }
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   color: var(--bright);
-  letter-spacing: -0.015em;
-  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
   margin: 0 0 1rem;
 }
 
 p { margin: 0 0 1rem; }
 
 a {
-  color: var(--accent);
+  color: var(--accent-2);
   text-decoration: none;
-  &:hover, &:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent-2-dim);
+  &:hover, &:focus-visible { text-decoration: underline; }
 }
 
 :focus-visible {
@@ -124,27 +117,28 @@ code, pre, kbd { font-family: var(--font-mono); font-size: 0.875em; }
 
 .btn {
   display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
-  border: 1px solid var(--accent-dim);
-  border-radius: 3px;
-  padding: 0.7rem 1.4rem;
-  transition: background-color 160ms ease, color 160ms ease;
+  border: 1px solid var(--accent);
+  padding: 0.75rem 2rem;
+  background: transparent;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 
   &:hover, &:focus-visible {
     background: var(--accent);
     color: var(--bg0);
+    box-shadow: 0 0 24px var(--gold-ghost);
     text-decoration: none;
   }
 }
 
 .btn--ghost {
-  border-color: var(--border);
-  color: var(--subdued);
-  &:hover, &:focus-visible { background: var(--bg3); color: var(--bright); }
+  border-color: var(--gold-border);
+  color: var(--accent);
+  &:hover, &:focus-visible { background: var(--gold-ghost); border-color: var(--accent); color: var(--accent); }
 }
 
 // ── Section rhythm + observation-log labels ─────────────────────────────────
@@ -166,7 +160,7 @@ main > section, body > section, .home-sections > section,
 }
 
 .section-label {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -203,29 +197,40 @@ main > section, body > section, .home-sections > section,
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 0.75rem clamp(1.5rem, 4vw, 3rem);
+  padding: 1.6rem clamp(1.5rem, 4vw, 3rem);
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.9rem;
   margin-right: auto;
   &:hover { text-decoration: none; }
 }
 
-.nav-logo-mark { height: 34px; width: 34px; }
+.nav-logo-mark { height: clamp(44px, 5vw, 58px); width: auto; flex-shrink: 0; }
 
 .nav-logo-text {
   font-family: var(--font-display);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
   color: var(--bright);
-  letter-spacing: 0.01em;
-  line-height: 1.1;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
 }
 
-.nav-logo-sub { color: var(--accent); font-weight: 500; }
+.nav-logo-sub {
+  display: block;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
 
 // search — the only .nav-card left in nav markup; flatten it
 .nav-card, .nav-card__interior {
@@ -241,7 +246,7 @@ main > section, body > section, .home-sections > section,
     border: 1px solid var(--border);
     border-radius: 3px;
     color: var(--text);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     padding: 0.45rem 0.75rem;
     width: 9.5rem;
@@ -284,7 +289,7 @@ main > section, body > section, .home-sections > section,
   display: block;
   padding: 0.35rem 0.85rem;
   color: var(--subdued);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -314,7 +319,7 @@ main > section, body > section, .home-sections > section,
   display: block;
   padding: 0.45rem 1rem;
   color: var(--subdued);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -352,7 +357,7 @@ main > section, body > section, .home-sections > section,
 
 .page-title-banner__eyebrow {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -371,68 +376,76 @@ main > section, body > section, .home-sections > section,
 // ── Hero ─────────────────────────────────────────────────────────────────────
 
 #hero {
-  min-height: 82vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 6rem clamp(1.5rem, 6vw, 6rem) 4rem;
+  min-height: calc(100vh - 7rem);
+  padding: 3rem 10vw 6rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-content: center;
+  gap: 3.5rem 0;
   position: relative;
+  z-index: 0;
+  background-color: var(--bg-hero);
+  // warm vignette + faint gilt scallop (illuminated-margin texture, echoes the card interiors)
+  background-image:
+    radial-gradient(ellipse 85% 70% at 50% 42%, transparent 28%, rgba(6, 4, 3, 0.62) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cpath d='M0 26 Q6.5 16 13 10 Q19.5 16 26 26' fill='none' stroke='%23B1935D' stroke-width='0.6' stroke-opacity='0.05'/%3E%3Cpath d='M-13 13 Q-6.5 3 0 -3 Q6.5 3 13 13' fill='none' stroke='%23B1935D' stroke-width='0.6' stroke-opacity='0.05'/%3E%3Cpath d='M13 13 Q19.5 3 26 -3 Q32.5 3 39 13' fill='none' stroke='%23B1935D' stroke-width='0.6' stroke-opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 26px 26px;
   border-bottom: 1px solid var(--hairline);
-
-  // vertical graduated scale down the left edge — instrument ornament
-  &::before {
-    content: "";
-    position: absolute;
-    left: clamp(0.5rem, 2vw, 2rem);
-    top: 15%;
-    bottom: 15%;
-    width: 5px;
-    background: repeating-linear-gradient(
-      to bottom,
-      var(--hairline) 0 1px, transparent 1px 12px,
-      var(--accent-dim) 12px 13px, transparent 13px 72px
-    );
-  }
 }
 
 .hero-identity {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .hero-name {
-  font-size: clamp(3rem, 9vw, 6.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 0.98;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  color: var(--text);
   margin: 0;
 }
 
 .hero-name-sub { color: var(--accent); font-weight: 500; }
 
-.hero-emblem img { height: clamp(72px, 10vw, 128px); opacity: 0.85; }
+.hero-emblem {
+  align-self: center;
+  width: clamp(140px, 16vw, 260px);
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.16));
+}
+.hero-emblem img { display: block; width: 100%; height: auto; }
 
-.hero-text { max-width: 46rem; margin-top: 2.5rem; }
+.hero-text { display: flex; flex-direction: column; gap: 1.5rem; max-width: 560px; }
 
 .hero-eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .hero-tagline {
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-size: 1.05rem;
   color: var(--subdued);
-  max-width: 44ch;
-  line-height: 1.6;
+  line-height: 1.85;
+  p { margin: 0; }
+  p:first-child {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    color: var(--text);
+    line-height: 1.45;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
 }
 
-.hero-cta { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
 .scroll-hint {
   position: absolute;
@@ -444,7 +457,7 @@ main > section, body > section, .home-sections > section,
   gap: 0.5rem;
 
   span {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.625rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
@@ -467,6 +480,18 @@ main > section, body > section, .home-sections > section,
   color: var(--text);
 
   strong { color: var(--bright); }
+
+  // illuminated initial — the manuscript signature: deep garnet with a gilt edge
+  > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 3.4em;
+    line-height: 0.82;
+    font-weight: 600;
+    color: var(--garnet-deep);
+    margin: 0.04em 0.1em 0 0;
+    text-shadow: 0.5px 1px 0 var(--gold-border);
+  }
 }
 
 // ── Interests teaser ─────────────────────────────────────────────────────────
@@ -610,7 +635,7 @@ main > section, body > section, .home-sections > section,
 }
 
 .carousel-count {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--muted);
   letter-spacing: 0.1em;
@@ -642,7 +667,7 @@ main > section, body > section, .home-sections > section,
   cite {
     display: block;
     margin-top: 1rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-style: normal;
     font-size: 0.75rem;
     letter-spacing: 0.08em;
@@ -650,18 +675,44 @@ main > section, body > section, .home-sections > section,
   }
 }
 
-// ── card--formula → flat Observatory panel (legacy markup in mission layout) ─
+// ── card--formula → firm boxed-gilt card (gold frame, cut corners, scalloped interior) ─
 
 .card--formula {
-  background: var(--bg1);
-  border-left: 2px solid var(--accent-dim);
-  border-radius: 0;
+  background: var(--gold-border);
+  padding: 3px;
+  position: relative;
+  clip-path: polygon(11px 0%, calc(100% - 11px) 0%, 100% 11px, 100% calc(100% - 11px), calc(100% - 11px) 100%, 11px 100%, 0% calc(100% - 11px), 0% 11px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.card--formula__interior { padding: 1.75rem; }
+.card--formula__interior {
+  background-color: var(--bg2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23B1935D' stroke-width='0.8' stroke-opacity='0.16'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23B1935D' stroke-width='0.8' stroke-opacity='0.16'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23B1935D' stroke-width='0.8' stroke-opacity='0.16'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
+  padding: 1.75rem;
+  clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+// ── arch-divider — gilded scalloped arch (firm signature) ─
+.arch-divider {
+  --arch-color: var(--gold-border);
+  width: 100%;
+  margin: 5rem 0;
+  padding: 0 10vw;
+  color: var(--arch-color);
+}
+.arch-divider svg { display: block; width: 100%; height: auto; }
+@media (max-width: 768px) {
+  .arch-divider { margin: 3.5rem 0; padding: 0 6vw; }
+}
 
 .card-tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -674,7 +725,7 @@ main > section, body > section, .home-sections > section,
 .card-desc { font-size: 0.9375rem; color: var(--subdued); }
 
 .card-link {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   letter-spacing: 0.06em;
 }
@@ -725,7 +776,7 @@ footer {
 .footer-logo-sub { color: var(--accent); font-weight: 500; }
 
 .footer-copy {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   letter-spacing: 0.06em;
   color: var(--muted);
@@ -736,7 +787,7 @@ footer {
   padding: 0.8rem clamp(1.5rem, 6vw, 6rem);
   background: var(--bg1);
   border-top: 1px solid var(--border);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   line-height: 1.6;
   color: var(--muted);
@@ -760,7 +811,7 @@ footer {
 }
 
 .post-back {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -780,7 +831,7 @@ footer {
 .svc-hero-inner--single { justify-content: flex-start; }
 
 .post-category {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -824,7 +875,7 @@ footer {
   padding: 1.5rem 0;
 
   .toc-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -850,7 +901,7 @@ footer {
 @media (max-width: 700px) { .svc-section { grid-template-columns: 1fr; gap: 0.5rem; } }
 
 .svc-section-label p {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -870,7 +921,7 @@ footer {
 .bib-card { padding: 1.25rem 0; border-top: 1px solid var(--hairline); }
 .bib-title { color: var(--bright); font-weight: 500; }
 .bib-byline, .bib-venue { font-size: 0.875rem; color: var(--subdued); }
-.bib-link { font-family: var(--font-mono); font-size: 0.8125rem; }
+.bib-link { font-family: var(--font-body); font-size: 0.8125rem; }
 
 // mission layout (ouroboros) — the one serif page
 .layout--mission, body.has-title-banner .mission-body,
@@ -898,7 +949,7 @@ footer {
 .playlist-title { font-family: var(--font-display); font-weight: 600; color: var(--bright); }
 
 .playlist-meta {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--muted);
   letter-spacing: 0.08em;
@@ -906,7 +957,7 @@ footer {
 
 .playlist-carousel-controls { display: flex; align-items: center; gap: 0.75rem; }
 
-.playlist-carousel-count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.playlist-carousel-count { font-family: var(--font-body); font-size: 0.75rem; color: var(--muted); }
 
 // ── CV ───────────────────────────────────────────────────────────────────────
 
@@ -925,7 +976,7 @@ footer {
 
   span {
     display: block;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     font-weight: 400;
     letter-spacing: 0.22em;
@@ -936,7 +987,7 @@ footer {
 }
 
 .cv-contact {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: var(--subdued);
   text-align: right;
@@ -958,7 +1009,7 @@ footer {
 
 .cv-section__title {
   font-size: 1.05rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -970,7 +1021,7 @@ footer {
 .cv-entry__meta {
   display: flex;
   gap: 1.5rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -993,7 +1044,7 @@ footer {
   gap: 0.5rem;
 
   span {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.75rem;
     color: var(--text);
     background: var(--bg2);

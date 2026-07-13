@@ -1,0 +1,62 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "npm run build",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build",
+			"options": {
+				"shell": {
+					"executable": "/bin/zsh",
+					"args": [
+						"-c"
+					]
+				},
+				"env": {
+					"PATH": "/Users/apostolos/.rbenv/shims:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+				}
+			}
+		},
+		{
+			"type": "shell",
+			"command": "npm run dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"group": "build",
+			"options": {
+				"shell": {
+					"executable": "/bin/zsh",
+					"args": [
+						"-c"
+					]
+				},
+				"env": {
+					"PATH": "/Users/apostolos/.rbenv/shims:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+				}
+			}
+		},
+		{
+			"type": "shell",
+			"command": "npm run verify",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: verify",
+			"options": {
+				"shell": {
+					"executable": "/bin/zsh",
+					"args": [
+						"-c"
+					]
+				},
+				"env": {
+					"PATH": "/Users/apostolos/.rbenv/shims:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+				}
+			}
+		}
+	]
+}
