@@ -1,0 +1,1306 @@
+---
+permalink: /portfolio/metalhead/
+title: "Pyre — Metalhead"
+---
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyre &#10038; Metalhead &#183; {{ site.author }}</title>
+    <meta name="description"
+      content="Metalhead design world. A fictional doom and post-metal identity built to test impact, contrast, and legibility under maximum aggression.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=UnifrakturCook:wght@700&family=Grenze:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700;800&display=swap">
+
+    <style>
+      /* ===================================================================
+         METALHEAD — isolated design world.
+         Tokens are prefixed --mh- so nothing here can leak into, or be
+         reached by, the site's manuscript identity (garnet + gilt).
+         Ships dark-only by design: contrast is delivered by the in-page
+         newsprint inversion band, not by a light-mode override.
+
+         TYPE POLICY (traditional): textura carries the wordmark AND every
+         heading. Inter is gone. UI chrome is mono, body is Grenze, the
+         rough-cut roman companion to the blackletter.
+         =================================================================== */
+
+      :root {
+        /* Ground — true black. The fire is the only light in the room. */
+        --mh-bg0: #030202;
+        --mh-bg1: #070605;
+        --mh-bg2: #0C0A09;
+        --mh-bg3: #131010;
+
+        /* Heat ramp — hierarchy is temperature. Hotter = higher rank. */
+        --mh-hot: #FF4D0F;
+        /* hot core     6.9:1 on bg0 */
+        --mh-flare: #FFA857;
+        /* flare tip    display only */
+        --mh-ember: #B31E0C;
+        /* deep ember   dark grounds only */
+        --mh-ember-ink: #7A1206;
+        /* ember for the newsprint band, 4.9:1 */
+        --mh-char: #380F04;
+
+        /* Neutrals — soot, not silver */
+        --mh-bone: #E6DFD3;
+        /* 15.9:1 on bg0 */
+        --mh-ash: #8A817A;
+        /* 5.6:1 on bg0, 5.3:1 on bg2 */
+        --mh-iron: #241F1D;
+        --mh-news: #B4ADA2;
+        /* soot-stained newsprint, the inversion band */
+        --mh-ink: #080605;
+        --mh-hair: rgba(255, 77, 15, 0.25);
+        --mh-ghost: rgba(255, 77, 15, 0.07);
+
+        /* Textura for the wordmark, heavier textura for headings */
+        --mh-fraktur: "UnifrakturMaguntia", serif;
+        --mh-display: "UnifrakturCook", "UnifrakturMaguntia", serif;
+        --mh-body: "Grenze", "Times New Roman", serif;
+        --mh-ui: "JetBrains Mono", ui-monospace, monospace;
+
+        --mh-gut: clamp(1.25rem, 5vw, 4rem);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--mh-bg0);
+        color: var(--mh-bone);
+        font-family: var(--mh-body);
+        font-size: 1.06rem;
+        font-weight: 400;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Emulsion: coarse grain + fine grain + scanline degradation, all
+         fixed, so the whole page sits under one damaged negative. */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.34;
+        mix-blend-mode: overlay;
+        background-image:
+          repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0 1px, transparent 1px 4px),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.14' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23b)' opacity='0.6'/%3E%3C/svg%3E");
+      }
+
+      /* Filter defs live off-screen but must stay in the render tree. */
+      .defs {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      a {
+        color: var(--mh-hot);
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:focus-visible {
+        text-decoration: underline;
+        text-underline-offset: 0.25em;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--mh-hot);
+        outline-offset: 3px;
+      }
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--mh-hot);
+        color: var(--mh-ink);
+        padding: 0.75rem 1.25rem;
+        font-family: var(--mh-ui);
+        font-weight: 700;
+        z-index: 10000;
+      }
+
+      .skip:focus {
+        left: 0;
+      }
+
+      .wrap {
+        max-width: 76rem;
+        margin: 0 auto;
+        padding-inline: var(--mh-gut);
+      }
+
+      /* ---------------------------------------------------------------
+         Section labels — mono, hard-tracked, scratched rule.
+         --------------------------------------------------------------- */
+      .label {
+        font-family: var(--mh-ui);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        color: var(--mh-hot);
+        margin: 0 0 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .label::after {
+        content: "";
+        flex: 1;
+        height: 3px;
+        background:
+          repeating-linear-gradient(to right, var(--mh-hot) 0 1px, transparent 1px 4px),
+          repeating-linear-gradient(to right, var(--mh-ember) 0 7px, transparent 7px 11px);
+        opacity: 0.7;
+      }
+
+      /* Scratched seam between bands. Two crosshatched gradients so the
+         line never resolves into anything clean. */
+      .band {
+        position: relative;
+        padding-block: clamp(3.5rem, 9vw, 7rem);
+      }
+
+      .band+.band::before {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        height: 9px;
+        background:
+          repeating-linear-gradient(118deg, var(--mh-ember) 0 2px, transparent 2px 7px),
+          repeating-linear-gradient(-124deg, var(--mh-hot) 0 1px, transparent 1px 11px);
+        opacity: 0.55;
+      }
+
+      /* ---------------------------------------------------------------
+         Headings — traditional textura throughout.
+         --------------------------------------------------------------- */
+      h2 {
+        font-family: var(--mh-display);
+        font-weight: 700;
+        font-size: clamp(2.1rem, 5.6vw, 3.9rem);
+        line-height: 1.02;
+        letter-spacing: 0.005em;
+        margin: 0 0 1.1rem;
+        color: var(--mh-bone);
+        text-shadow: 2px 0 0 rgba(179, 30, 12, 0.55);
+      }
+
+      h3 {
+        font-family: var(--mh-display);
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 1.1;
+        margin: 0 0 0.4rem;
+      }
+
+      p {
+        max-width: 44rem;
+      }
+
+      .lede {
+        font-size: 1.12rem;
+        color: var(--mh-ash);
+        max-width: 38rem;
+      }
+
+      /* ---------------------------------------------------------------
+         Buttons — notched corners, no radius anywhere on this page.
+         --------------------------------------------------------------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 1.7rem;
+        font-family: var(--mh-ui);
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        background: var(--mh-hot);
+        color: var(--mh-ink);
+        border: 1px solid var(--mh-hot);
+        clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+        transition: background 0.1s steps(2), color 0.1s steps(2);
+      }
+
+      .btn:hover,
+      .btn:focus-visible {
+        text-decoration: none;
+        background: var(--mh-flare);
+        border-color: var(--mh-flare);
+      }
+
+      .btn--ghost {
+        background: transparent;
+        color: var(--mh-hot);
+      }
+
+      .btn--ghost:hover,
+      .btn--ghost:focus-visible {
+        background: var(--mh-hot);
+        color: var(--mh-ink);
+      }
+
+      /* ===============================================================
+         NAV
+         =============================================================== */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(3, 2, 2, 0.94);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--mh-iron);
+      }
+
+      .nav__inner {
+        max-width: 76rem;
+        margin: 0 auto;
+        padding: 0.7rem var(--mh-gut);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      .nav__mark {
+        font-family: var(--mh-fraktur);
+        font-size: 1.75rem;
+        line-height: 1;
+        color: var(--mh-bone);
+      }
+
+      .nav__mark:hover {
+        text-decoration: none;
+        color: var(--mh-hot);
+      }
+
+      .nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 1.6rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .nav a:not(.nav__mark):not(.btn) {
+        font-family: var(--mh-ui);
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--mh-ash);
+      }
+
+      .nav a:not(.nav__mark):not(.btn):hover,
+      .nav a:not(.nav__mark):not(.btn):focus-visible {
+        color: var(--mh-bone);
+        text-decoration: none;
+      }
+
+      .nav .btn {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.6rem;
+      }
+
+      /* ===============================================================
+         HERO
+         =============================================================== */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        min-height: clamp(30rem, 82vh, 46rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: clamp(3rem, 8vw, 6rem) var(--mh-gut) clamp(4rem, 9vw, 7rem);
+        background: radial-gradient(ellipse 78% 52% at 50% 112%, #170502 0%, var(--mh-bg0) 58%);
+      }
+
+      /* Two turbulence-displaced ember sheets. Low blur and high
+         displacement so the fire has defined licks, not a soft glow. */
+      .flame {
+        position: absolute;
+        left: -12%;
+        bottom: -12%;
+        height: 75%;
+        width: 124%;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        -webkit-mask-image:
+          linear-gradient(to top, #000 0 30%, transparent 96%),
+          linear-gradient(to right, transparent 0, #000 16% 84%, transparent 100%);
+        mask-image:
+          linear-gradient(to top, #000 0 30%, transparent 96%),
+          linear-gradient(to right, transparent 0, #000 16% 84%, transparent 100%);
+        -webkit-mask-composite: source-in;
+        mask-composite: intersect;
+      }
+
+      .flame--a {
+        opacity: 0.85;
+        animation: drift-a 9s ease-in-out infinite;
+      }
+
+      .flame--b {
+        opacity: 0.6;
+        animation: drift-b 14s ease-in-out infinite;
+      }
+
+      @keyframes drift-a {
+
+        0%,
+        100% {
+          transform: translate3d(-1.5%, 0, 0) scaleY(1);
+        }
+
+        50% {
+          transform: translate3d(2%, -4%, 0) scaleY(1.14);
+        }
+      }
+
+      @keyframes drift-b {
+
+        0%,
+        100% {
+          transform: translate3d(2.5%, -1%, 0) scaleY(1.1) scaleX(-1);
+        }
+
+        50% {
+          transform: translate3d(-2%, -6%, 0) scaleY(0.92) scaleX(-1);
+        }
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        height: 30%;
+        pointer-events: none;
+        background: linear-gradient(to top, rgba(3, 2, 2, 0.82), transparent);
+      }
+
+      /* Content only. Must not match .flame, or the absolute positioning
+         on the flame sheets gets overridden and they drop into flow. */
+      .hero> :not(.flame) {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero__eyebrow {
+        font-family: var(--mh-ui);
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.5em;
+        text-transform: uppercase;
+        color: var(--mh-ash);
+        margin: 0 0 clamp(1rem, 3vw, 2rem);
+      }
+
+      /* Mixed case, not caps: textura capitals are near-illegible at
+         any size. Lowercase carries the blackletter texture. The whole
+         lockup runs through an SVG turbulence warp for rough-press
+         distortion, plus a hard ember ghost offset. */
+      .wordmark {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        font-family: var(--mh-fraktur);
+        font-weight: 400;
+        font-size: clamp(5rem, 26vw, 17rem);
+        line-height: 0.82;
+        letter-spacing: 0.01em;
+        filter: url(#mh-warp);
+      }
+
+      .wordmark__base {
+        color: var(--mh-bone);
+        text-shadow:
+          3px 0 0 rgba(179, 30, 12, 0.75),
+          -2px 0 0 rgba(255, 77, 15, 0.35),
+          0 0 70px rgba(255, 77, 15, 0.3);
+      }
+
+      /* Fire climbing through the letterforms. Duplicated as real markup
+         rather than ::before content so screen readers that announce
+         pseudo-content cannot double-read the wordmark. */
+      .wordmark__fire {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top,
+            var(--mh-flare) 0%,
+            var(--mh-hot) 15%,
+            var(--mh-ember) 30%,
+            transparent 46%);
+        background-size: 100% 195%;
+        background-position: 0 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: lick 6s ease-in-out infinite;
+      }
+
+      @keyframes lick {
+
+        0%,
+        100% {
+          background-position: 0 100%;
+        }
+
+        50% {
+          background-position: 0 62%;
+        }
+      }
+
+      .hero__tag {
+        font-family: var(--mh-body);
+        font-weight: 400;
+        font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+        color: var(--mh-ash);
+        max-width: 34rem;
+        margin: clamp(1.5rem, 4vw, 2.5rem) auto clamp(1.75rem, 4vw, 2.5rem);
+        line-height: 1.5;
+      }
+
+      .hero__cta {
+        display: flex;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      /* ===============================================================
+         I — THE RECORD
+         =============================================================== */
+      .record {
+        background: var(--mh-bg1);
+      }
+
+      .record__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: start;
+      }
+
+      @media (min-width: 62rem) {
+        .record__grid {
+          grid-template-columns: 22rem minmax(0, 1fr);
+        }
+      }
+
+      .sleeve {
+        position: relative;
+        aspect-ratio: 1;
+        background: #000;
+        border: 1px solid var(--mh-iron);
+        display: grid;
+        place-items: center;
+      }
+
+      .sleeve svg {
+        width: 74%;
+        height: 74%;
+        filter: url(#mh-warp-hard);
+      }
+
+      .sleeve__caption {
+        margin: 0.9rem 0 0;
+        font-family: var(--mh-ui);
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--mh-ash);
+      }
+
+      .record__title {
+        font-family: var(--mh-display);
+        font-weight: 700;
+        font-size: clamp(2.3rem, 6.2vw, 4.2rem);
+        line-height: 0.98;
+        margin: 0 0 0.9rem;
+        letter-spacing: 0.005em;
+        text-shadow: 3px 0 0 rgba(179, 30, 12, 0.6);
+      }
+
+      /* Tracklist ledger */
+      .tracks {
+        list-style: none;
+        margin: 2rem 0 0;
+        padding: 0;
+        border-top: 1px solid var(--mh-iron);
+        counter-reset: trk;
+      }
+
+      .tracks li {
+        counter-increment: trk;
+        display: grid;
+        grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+        gap: 1rem;
+        align-items: baseline;
+        padding: 0.9rem 0.75rem;
+        border-bottom: 1px solid var(--mh-iron);
+        box-shadow: inset 0 0 0 0 var(--mh-hot);
+        transition: background 0.1s steps(2), box-shadow 0.1s steps(2);
+      }
+
+      .tracks li::before {
+        content: counter(trk, decimal-leading-zero);
+        font-family: var(--mh-ui);
+        font-size: 0.76rem;
+        font-weight: 700;
+        /* Ash, not ember: ember is 3.07:1 on this ground and these are
+           real small text. Heat comes back on hover. */
+        color: var(--mh-ash);
+        transition: color 0.1s steps(2);
+      }
+
+      .tracks li:hover {
+        background: var(--mh-ghost);
+        box-shadow: inset 3px 0 0 0 var(--mh-hot);
+      }
+
+      .tracks li:hover::before {
+        color: var(--mh-hot);
+      }
+
+      .tracks__name {
+        font-family: var(--mh-display);
+        font-weight: 700;
+        font-size: 1.24rem;
+        line-height: 1.15;
+      }
+
+      .tracks__len {
+        font-family: var(--mh-ui);
+        font-size: 0.76rem;
+        color: var(--mh-ash);
+      }
+
+      /* ===============================================================
+         II — THE UNMAKING (tour ledger)
+         =============================================================== */
+      .tour {
+        background: var(--mh-bg0);
+      }
+
+      .tour__scroll {
+        overflow-x: auto;
+        margin-top: 2rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 42rem;
+      }
+
+      caption {
+        text-align: left;
+        font-family: var(--mh-ui);
+        font-size: 0.66rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--mh-ash);
+        padding-bottom: 1rem;
+      }
+
+      th {
+        text-align: left;
+        font-family: var(--mh-ui);
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--mh-hot);
+        padding: 0 0.75rem 0.7rem;
+        border-bottom: 1px solid var(--mh-hair);
+      }
+
+      td {
+        padding: 1rem 0.75rem;
+        border-bottom: 1px solid var(--mh-iron);
+        vertical-align: baseline;
+      }
+
+      tbody tr {
+        box-shadow: inset 0 0 0 0 var(--mh-hot);
+        transition: background 0.1s steps(2), box-shadow 0.1s steps(2);
+      }
+
+      tbody tr:hover {
+        background: var(--mh-ghost);
+        box-shadow: inset 3px 0 0 0 var(--mh-hot);
+      }
+
+      .td-date {
+        font-family: var(--mh-ui);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--mh-bone);
+        white-space: nowrap;
+      }
+
+      .td-city {
+        font-family: var(--mh-display);
+        font-weight: 700;
+        font-size: 1.3rem;
+        line-height: 1.1;
+      }
+
+      .td-venue {
+        color: var(--mh-ash);
+        font-size: 0.95rem;
+      }
+
+      .td-status {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .gone {
+        font-family: var(--mh-ui);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--mh-ash);
+        text-decoration: line-through;
+        text-decoration-color: var(--mh-ember);
+        text-decoration-thickness: 3px;
+      }
+
+      .tickets {
+        font-family: var(--mh-ui);
+        font-size: 0.64rem;
+        font-weight: 800;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--mh-hot);
+        border-bottom: 1px solid var(--mh-hair);
+      }
+
+      .tickets:hover {
+        text-decoration: none;
+        border-bottom-color: var(--mh-hot);
+      }
+
+      /* ===============================================================
+         III — GOODS. Soot-stained newsprint inversion with torn edges.
+         This band carries the "Contrast" half of the brief.
+         =============================================================== */
+      .goods {
+        background: var(--mh-news);
+        color: var(--mh-ink);
+        /* Torn top and bottom. Irregular by hand; a clean zigzag would
+           read as a decorative border instead of damage. */
+        clip-path: polygon(0 14px,
+            6% 3px, 11% 16px, 17% 5px, 23% 18px, 29% 2px, 36% 13px,
+            43% 4px, 49% 17px, 56% 6px, 62% 15px, 69% 3px, 75% 14px,
+            82% 5px, 88% 16px, 94% 4px, 100% 12px,
+            100% calc(100% - 13px),
+            95% calc(100% - 3px), 89% calc(100% - 15px), 83% calc(100% - 5px),
+            76% calc(100% - 17px), 70% calc(100% - 4px), 64% calc(100% - 14px),
+            57% calc(100% - 6px), 50% calc(100% - 16px), 44% calc(100% - 3px),
+            37% calc(100% - 13px), 30% calc(100% - 5px), 24% calc(100% - 17px),
+            18% calc(100% - 4px), 12% calc(100% - 14px), 6% calc(100% - 6px),
+            0 calc(100% - 12px));
+        padding-block: clamp(4.5rem, 10vw, 8rem);
+      }
+
+      /* Halftone dither over the newsprint */
+      .goods::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.14;
+        background-image: radial-gradient(circle at center, var(--mh-ink) 0.5px, transparent 0.6px);
+        background-size: 4px 4px;
+      }
+
+      .goods>* {
+        position: relative;
+        z-index: 1;
+      }
+
+      .goods .label {
+        color: var(--mh-ember-ink);
+      }
+
+      .goods .label::after {
+        background:
+          repeating-linear-gradient(to right, var(--mh-ember-ink) 0 1px, transparent 1px 4px),
+          repeating-linear-gradient(to right, var(--mh-ink) 0 7px, transparent 7px 11px);
+        opacity: 0.6;
+      }
+
+      .goods h2 {
+        color: var(--mh-ink);
+        text-shadow: 2px 0 0 rgba(122, 18, 6, 0.5);
+      }
+
+      .goods .lede {
+        color: #3E3830;
+      }
+
+      .goods__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 1.25rem;
+        margin-top: 2.75rem;
+      }
+
+      .good {
+        border: 2px solid var(--mh-ink);
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        background: transparent;
+        clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        transition: background 0.1s steps(2), color 0.1s steps(2);
+      }
+
+      .good:hover,
+      .good:focus-within {
+        background: var(--mh-ink);
+        color: var(--mh-news);
+      }
+
+      .good__slug {
+        font-family: var(--mh-ui);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--mh-ember-ink);
+      }
+
+      .good:hover .good__slug,
+      .good:focus-within .good__slug {
+        color: var(--mh-hot);
+      }
+
+      .good h3 {
+        font-size: 1.55rem;
+        letter-spacing: 0.005em;
+        margin: 0;
+      }
+
+      .good__desc {
+        font-size: 0.95rem;
+        color: #3E3830;
+        margin: 0;
+        flex: 1;
+      }
+
+      .good:hover .good__desc,
+      .good:focus-within .good__desc {
+        color: var(--mh-ash);
+      }
+
+      .good__price {
+        font-family: var(--mh-ui);
+        font-size: 1.05rem;
+        font-weight: 800;
+        margin-top: 0.85rem;
+      }
+
+      /* ===============================================================
+         IV — THE DESIGN. Voice breaks the fiction on purpose.
+         =============================================================== */
+      .rationale {
+        background: var(--mh-bg2);
+      }
+
+      /* Only place on the page that steps out of textura: the designer
+         speaking plainly should not be costumed. */
+      .rationale h2 {
+        font-family: var(--mh-ui);
+        font-weight: 800;
+        font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+        letter-spacing: -0.01em;
+        text-shadow: none;
+      }
+
+      .notes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+        gap: 1.9rem 2.5rem;
+        margin-top: 2.75rem;
+      }
+
+      .note h3 {
+        font-family: var(--mh-ui);
+        font-size: 0.66rem;
+        font-weight: 800;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--mh-hot);
+        margin-bottom: 0.6rem;
+      }
+
+      .note p {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--mh-ash);
+      }
+
+      .swatches {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        margin-top: 3rem;
+        border: 1px solid var(--mh-iron);
+      }
+
+      .swatch {
+        flex: 1 1 7rem;
+        padding: 1.1rem 0.9rem 0.9rem;
+        font-family: var(--mh-ui);
+        font-size: 0.6rem;
+        line-height: 1.6;
+        letter-spacing: 0.08em;
+      }
+
+      .swatch b {
+        display: block;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        opacity: 0.7;
+      }
+
+      .embed {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--mh-iron);
+      }
+
+      /* The embed is a real-world artifact intruding on the fiction.
+         Desaturated and dimmed so it reads as a pasted-in scrap. */
+      .embed iframe {
+        max-width: 100%;
+        color-scheme: light;
+        filter: grayscale(0.7) contrast(1.1) brightness(0.82);
+        border: 1px solid var(--mh-iron) !important;
+      }
+
+      /* ===============================================================
+         FOOTER
+         =============================================================== */
+      .site-footer {
+        background: #000;
+        border-top: 1px solid var(--mh-iron);
+        padding: 3rem var(--mh-gut);
+        text-align: center;
+      }
+
+      .site-footer p {
+        max-width: none;
+        margin: 0.4rem 0;
+        font-size: 0.9rem;
+        color: var(--mh-ash);
+      }
+
+      .footer-mark {
+        font-family: var(--mh-fraktur);
+        font-size: 2.4rem;
+        color: var(--mh-iron);
+        line-height: 1;
+        margin-bottom: 1rem;
+      }
+
+      /* ===============================================================
+         MOTION
+         =============================================================== */
+      @media (prefers-reduced-motion: reduce) {
+
+        html {
+          scroll-behavior: auto;
+        }
+
+        .flame--a,
+        .flame--b,
+        .wordmark__fire {
+          animation: none;
+        }
+
+        .wordmark__fire {
+          background-position: 0 78%;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Distortion filters. Must remain in the render tree to resolve. -->
+    <svg class="defs" aria-hidden="true" focusable="false">
+      <filter id="mh-warp" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.022 0.07" numOctaves="3" seed="11" result="w" />
+        <feDisplacementMap in="SourceGraphic" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="mh-warp-hard" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.09" numOctaves="2" seed="4" result="w" />
+        <feDisplacementMap in="SourceGraphic" in2="w" scale="3.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
+    <header>
+      <nav class="nav" aria-label="Main">
+        <div class="nav__inner">
+          <a class="nav__mark" href="#top">Pyre</a>
+          <ul>
+            <li><a href="#record">The Record</a></li>
+            <li><a href="#tour">Tour</a></li>
+            <li><a href="#goods">Goods</a></li>
+            <li><a href="#design">The Design</a></li>
+            <li><a class="btn btn--ghost" href="/">&#8592; Portfolio</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="hero" id="top">
+        <!-- Procedural fire: turbulence-displaced ember gradient, two
+             sheets at different seeds, CSS-driven drift. -->
+        <svg class="flame flame--a" viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true"
+          focusable="false">
+          <defs>
+            <filter id="mh-fire-a" x="-25%" y="-25%" width="150%" height="150%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.055 0.011" numOctaves="5" seed="7" result="n" />
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="165" xChannelSelector="R" yChannelSelector="G" />
+              <feGaussianBlur stdDeviation="1.6" />
+            </filter>
+            <linearGradient id="mh-ember-a" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#FFA857" stop-opacity="0.95" />
+              <stop offset="26%" stop-color="#FF4D0F" stop-opacity="0.78" />
+              <stop offset="60%" stop-color="#B31E0C" stop-opacity="0.32" />
+              <stop offset="100%" stop-color="#B31E0C" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <rect width="800" height="400" fill="url(#mh-ember-a)" filter="url(#mh-fire-a)" />
+        </svg>
+
+        <svg class="flame flame--b" viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true"
+          focusable="false">
+          <defs>
+            <filter id="mh-fire-b" x="-25%" y="-25%" width="150%" height="150%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.09 0.02" numOctaves="4" seed="23" result="n" />
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="135" xChannelSelector="R" yChannelSelector="G" />
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
+            <linearGradient id="mh-ember-b" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#FF4D0F" stop-opacity="0.85" />
+              <stop offset="45%" stop-color="#B31E0C" stop-opacity="0.45" />
+              <stop offset="100%" stop-color="#380F04" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <rect width="800" height="400" fill="url(#mh-ember-b)" filter="url(#mh-fire-b)" />
+        </svg>
+
+        <p class="hero__eyebrow">Doom &#10038; Post-Metal &#10038; Est. MMXIX</p>
+
+        <h1 class="wordmark">
+          <span class="wordmark__base">Pyre</span>
+          <span class="wordmark__fire" aria-hidden="true">Pyre</span>
+        </h1>
+
+        <p class="hero__tag">Four movements on grief, refusal, and the specific relief of watching a
+          thing finally burn.</p>
+
+        <div class="hero__cta">
+          <a class="btn" href="#record">Hear the record</a>
+          <a class="btn btn--ghost" href="#tour">Tour dates</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <!-- ========== I. THE RECORD ========== -->
+      <section class="band record" id="record" aria-labelledby="record-h">
+        <div class="wrap">
+          <p class="label">I &#10038; The Record</p>
+
+          <div class="record__grid">
+            <div>
+              <div class="sleeve">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Album sigil: an inverted triangle inside a broken
+                  ring, pierced by a vertical bar and radiating spokes.">
+                  <g fill="none" stroke="#FF4D0F" stroke-width="1.5">
+                    <circle cx="100" cy="100" r="78" stroke-dasharray="150 14" opacity="0.85" />
+                    <circle cx="100" cy="100" r="64" stroke-width="0.75" opacity="0.5" />
+                    <path d="M100 148 L52 62 L148 62 Z" stroke="#B31E0C" stroke-width="2.5" />
+                    <path d="M100 20 L100 180" stroke-width="2" />
+                    <g stroke-width="0.75" opacity="0.55">
+                      <path d="M100 100 L100 22" />
+                      <path d="M100 100 L167 61" />
+                      <path d="M100 100 L167 139" />
+                      <path d="M100 100 L100 178" />
+                      <path d="M100 100 L33 139" />
+                      <path d="M100 100 L33 61" />
+                    </g>
+                    <circle cx="100" cy="100" r="9" fill="#B31E0C" stroke="none" />
+                    <circle cx="100" cy="100" r="4" fill="#FFA857" stroke="none" />
+                  </g>
+                </svg>
+              </div>
+              <p class="sleeve__caption">LP &#183; 2xLP Oxblood &#183; Cassette &#183; Digital</p>
+            </div>
+
+            <div>
+              <h2 class="record__title" id="record-h">All That Will Burn</h2>
+              <p class="lede">Recorded live to tape in a decommissioned grain elevator over nine
+                nights. No click track. No second takes. The room is the fifth member.</p>
+
+              <ol class="tracks">
+                <li><span class="tracks__name">Threshing Floor</span><span class="tracks__len">08:14</span></li>
+                <li><span class="tracks__name">Every Door I Was Told to Use</span><span
+                    class="tracks__len">11:02</span></li>
+                <li><span class="tracks__name">Ash Ledger</span><span class="tracks__len">06:37</span></li>
+                <li><span class="tracks__name">Witness, Unbelieved</span><span class="tracks__len">09:55</span></li>
+                <li><span class="tracks__name">The Unmaking</span><span class="tracks__len">13:41</span></li>
+                <li><span class="tracks__name">Salt, Then Nothing</span><span class="tracks__len">07:20</span></li>
+              </ol>
+
+              <p style="margin-top:2rem">
+                <a class="btn" href="#goods">Order the LP</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== II. THE UNMAKING (TOUR) ========== -->
+      <section class="band tour" id="tour" aria-labelledby="tour-h">
+        <div class="wrap">
+          <p class="label">II &#10038; The Unmaking</p>
+          <h2 id="tour-h">North American Dates</h2>
+          <p class="lede">Small rooms only. No barricades. Earplugs at the door, free, and you
+            will want them.</p>
+
+          <div class="tour__scroll">
+            <table>
+              <caption>Autumn 2026 routing &#183; all ages unless noted</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">City</th>
+                  <th scope="col">Venue</th>
+                  <th scope="col" class="td-status">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-date">09 OCT</td>
+                  <td class="td-city">Minneapolis, MN</td>
+                  <td class="td-venue">The Cedar</td>
+                  <td class="td-status"><span class="gone">Sold Out</span></td>
+                </tr>
+                <tr>
+                  <td class="td-date">11 OCT</td>
+                  <td class="td-city">Chicago, IL</td>
+                  <td class="td-venue">Empty Bottle</td>
+                  <td class="td-status"><a class="tickets" href="#goods">Tickets</a></td>
+                </tr>
+                <tr>
+                  <td class="td-date">14 OCT</td>
+                  <td class="td-city">Detroit, MI</td>
+                  <td class="td-venue">Sanctuary</td>
+                  <td class="td-status"><a class="tickets" href="#goods">Tickets</a></td>
+                </tr>
+                <tr>
+                  <td class="td-date">17 OCT</td>
+                  <td class="td-city">Brooklyn, NY</td>
+                  <td class="td-venue">Saint Vitus</td>
+                  <td class="td-status"><span class="gone">Sold Out</span></td>
+                </tr>
+                <tr>
+                  <td class="td-date">20 OCT</td>
+                  <td class="td-city">Philadelphia, PA</td>
+                  <td class="td-venue">First Unitarian</td>
+                  <td class="td-status"><a class="tickets" href="#goods">Tickets</a></td>
+                </tr>
+                <tr>
+                  <td class="td-date">23 OCT</td>
+                  <td class="td-city">Richmond, VA</td>
+                  <td class="td-venue">Strange Matter</td>
+                  <td class="td-status"><a class="tickets" href="#goods">Tickets</a></td>
+                </tr>
+                <tr>
+                  <td class="td-date">27 OCT</td>
+                  <td class="td-city">Denver, CO</td>
+                  <td class="td-venue">Hi-Dive</td>
+                  <td class="td-status"><span class="gone">Sold Out</span></td>
+                </tr>
+                <tr>
+                  <td class="td-date">31 OCT</td>
+                  <td class="td-city">Seattle, WA</td>
+                  <td class="td-venue">Neumos</td>
+                  <td class="td-status"><a class="tickets" href="#goods">Tickets</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== III. GOODS (inversion band) ========== -->
+      <section class="band goods" id="goods" aria-labelledby="goods-h">
+        <div class="wrap">
+          <p class="label">III &#10038; Goods</p>
+          <h2 id="goods-h">Merch</h2>
+          <p class="lede">Screen printed in Minneapolis. Union shop. Everything ships in recycled
+            kraft with a hand-numbered insert.</p>
+
+          <div class="goods__grid">
+            <article class="good">
+              <span class="good__slug">PYR-001 &#183; Vinyl</span>
+              <h3>All That Will Burn</h3>
+              <p class="good__desc">2xLP, oxblood marble, gatefold with letterpress sigil. Limited
+                to 500. Includes download.</p>
+              <span class="good__price">$34</span>
+            </article>
+
+            <article class="good">
+              <span class="good__slug">PYR-002 &#183; Apparel</span>
+              <h3>The Unmaking Longsleeve</h3>
+              <p class="good__desc">Black on black front sigil, full routing on the reverse,
+                red cuff print. Heavyweight cotton.</p>
+              <span class="good__price">$42</span>
+            </article>
+
+            <article class="good">
+              <span class="good__slug">PYR-003 &#183; Object</span>
+              <h3>Sigil Enamel Pin</h3>
+              <p class="good__desc">32mm hard enamel, antique brass plating, double post. Backed
+                on a printed card.</p>
+              <span class="good__price">$12</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== IV. THE DESIGN (fiction breaks) ========== -->
+      <section class="band rationale" id="design" aria-labelledby="design-h">
+        <div class="wrap">
+          <p class="label">IV &#10038; The Design</p>
+          <h2 id="design-h">Why this works</h2>
+          <p class="lede">Pyre is not a real band. It is a controlled test of whether a
+            traditional blackletter system can run an entire site, at full aggression,
+            without losing a single reader.</p>
+
+          <div class="notes">
+            <div class="note">
+              <h3>Textura, load-bearing</h3>
+              <p>Two authentic blackletters do the work: Maguntia for the wordmark, the heavier
+                Cook for every heading, track, city, and product. Body copy runs in Grenze, the
+                rough-cut roman companion, so the page reads as one hand rather than a costume
+                over a neutral sans.</p>
+            </div>
+
+            <div class="note">
+              <h3>The legibility floor</h3>
+              <p>Blackletter never sets below about 19px, never sets in all caps, and never
+                carries a full paragraph. Every micro-label, price, date, and button is mono.
+                That single rule is what buys the rest of the aggression.</p>
+            </div>
+
+            <div class="note">
+              <h3>Distortion in the render, not the asset</h3>
+              <p>The wordmark and sigil pass through turbulence displacement filters, so the
+                roughness is generated at paint time. Nothing is a pre-distressed image, nothing
+                pixelates, and the type stays selectable text.</p>
+            </div>
+
+            <div class="note">
+              <h3>Damaged emulsion</h3>
+              <p>Three fixed layers over the whole page: coarse blotch, fine grain, and 1px
+                scanline degradation. The band seams are crosshatched scratches and the newsprint
+                band is torn along both edges rather than cut.</p>
+            </div>
+
+            <div class="note">
+              <h3>Hierarchy by temperature</h3>
+              <p>Rank is heat. Flare at the wordmark, hot core on labels and calls to action,
+                deep ember on ordinals, ash on support. Grounds sit at near-absolute black so the
+                fire is the only light source in the room.</p>
+            </div>
+
+            <div class="note">
+              <h3>Contrast as a structural beat</h3>
+              <p>After three black sections the merch band inverts to soot-stained newsprint. It
+                lands like a snare hit, and it proves the palette survives on light ground, which
+                is where every printed piece will live.</p>
+            </div>
+          </div>
+
+          <div class="swatches">
+            <div class="swatch" style="background:#030202;color:#E6DFD3"><b>Ground</b>#030202</div>
+            <div class="swatch" style="background:#0C0A09;color:#E6DFD3"><b>Panel</b>#0C0A09</div>
+            <div class="swatch" style="background:#380F04;color:#E6DFD3"><b>Char</b>#380F04</div>
+            <div class="swatch" style="background:#7A1206;color:#E6DFD3"><b>Ember ink</b>#7A1206</div>
+            <div class="swatch" style="background:#B31E0C;color:#E6DFD3"><b>Ember</b>#B31E0C</div>
+            <div class="swatch" style="background:#FF4D0F;color:#080605"><b>Hot core</b>#FF4D0F</div>
+            <div class="swatch" style="background:#FFA857;color:#080605"><b>Flare</b>#FFA857</div>
+            <div class="swatch" style="background:#8A817A;color:#030202"><b>Ash</b>#8A817A</div>
+            <div class="swatch" style="background:#B4ADA2;color:#080605"><b>Newsprint</b>#B4ADA2</div>
+          </div>
+
+          <div class="embed">
+            <p class="label" style="margin-bottom:1rem">More from the studio</p>
+            {% include substack.html %}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-mark" aria-hidden="true">Pyre</p>
+      <p>Metalhead is one of five design worlds in the portfolio of
+        <a href="{{ site.github_url }}" rel="noopener noreferrer">{{ site.author }}</a>.
+        Pyre is a fictional band created for this study.
+      </p>
+      <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
+    </footer>
+  </body>
+
+</html>
