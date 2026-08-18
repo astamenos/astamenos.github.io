@@ -12,6 +12,11 @@ baseurl: ""
 include:
   - _pages
 
+# Generates sitemap.xml and robots.txt. Bundled with the github-pages
+# gem but NOT auto-enabled, so it has to be listed explicitly.
+plugins:
+  - jekyll-sitemap
+
 # Social URLs — referenced in _includes/footer.html as site.<key>
 github_url: "https://github.com/astamenos"
 linkedin_url: "https://linkedin.com/in/astamenos"
