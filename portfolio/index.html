@@ -1,0 +1,642 @@
+---
+permalink: /portfolio/
+title: "Design Worlds"
+---
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="default">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Worlds &#183; {{ site.author }}</title>
+    <meta name="description"
+      content="A design portfolio of distinct visual identities for niche audiences. One layout, many worlds. Switch themes from the navbar.">
+
+    <!-- Restore the saved theme before first paint, and mark that JS is
+         alive so the picker only appears when it can actually work. -->
+    <script>
+      (function () {
+        var r = document.documentElement;
+        r.classList.remove('no-js');
+        try {
+          var t = localStorage.getItem('portfolio-theme');
+          if (t) r.setAttribute('data-theme', t);
+        } catch (e) { /* private mode: fall through to default */ }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Lora:wght@400;600&family=UnifrakturCook:wght@700&display=swap">
+
+    <style>
+      /* ===================================================================
+         DESIGN WORLDS — portfolio index.
+
+         Self-contained, like /portfolio/metalhead/. It does not use
+         default.html, because the site's manuscript identity would fight
+         every theme this page is built to demonstrate.
+
+         HOW TO ADD A THEME
+         1. Add one [data-theme="slug"] block below. Nothing else in this
+            stylesheet may reference a theme by name.
+         2. Add one <option> to the picker.
+         3. Add one <article class="world"> card.
+         Layout never changes between themes. Only the 13 tokens do.
+         =================================================================== */
+
+      /* --- The token contract ------------------------------------------ */
+      :root,
+      [data-theme="default"] {
+        --bg: #0D0A08;
+        --panel: #14100C;
+        --line: #4A3B29;
+        --text: #E8E0D2;
+        --muted: #9C8F79;
+        --accent: #CE6B7A;
+        --accent-ink: #14100C;
+        --font-display: "Lora", Georgia, serif;
+        --font-body: "Lora", Georgia, serif;
+        --font-label: "Inter", system-ui, sans-serif;
+        --tracking: 0.22em;
+        --radius: 2px;
+        --texture: none;
+      }
+
+      [data-theme="metalhead"] {
+        --bg: #030202;
+        --panel: #0C0A09;
+        --line: #3E3633;
+        --text: #E6DFD3;
+        --muted: #8A817A;
+        --accent: #FF4D0F;
+        --accent-ink: #080605;
+        --font-display: "UnifrakturCook", "Lora", serif;
+        --font-body: "Inter", system-ui, sans-serif;
+        --font-label: "JetBrains Mono", ui-monospace, monospace;
+        --tracking: 0.4em;
+        --radius: 0;
+        --texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+      }
+
+      [data-theme="baroque"] {
+        --bg: #0B0A07;
+        --panel: #15120C;
+        --line: #564A2F;
+        --text: #F2EAD8;
+        --muted: #A99C7E;
+        --accent: #D4AF37;
+        --accent-ink: #0B0A07;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --font-body: "Cormorant Garamond", Georgia, serif;
+        --font-label: "Inter", system-ui, sans-serif;
+        --tracking: 0.34em;
+        --radius: 0;
+        --texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='none' stroke='%23D4AF37' stroke-width='0.6' opacity='0.20'%3E%3Cpath d='M20 4 L36 20 L20 36 L4 20 Z'/%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      [data-theme="modern-gothic"] {
+        --bg: #0A0A0B;
+        --panel: #121215;
+        --line: #43434B;
+        --text: #EFEFF2;
+        --muted: #8E8E97;
+        --accent: #C6BFD8;
+        --accent-ink: #0A0A0B;
+        --font-display: "Inter", system-ui, sans-serif;
+        --font-body: "Inter", system-ui, sans-serif;
+        --font-label: "Inter", system-ui, sans-serif;
+        --tracking: 0.3em;
+        --radius: 0;
+        --texture: none;
+      }
+
+      [data-theme="horror"] {
+        --bg: #060706;
+        --panel: #0C0E0C;
+        --line: #394138;
+        --text: #DDE1DA;
+        --muted: #808A7E;
+        --accent: #A3B565;
+        --accent-ink: #060706;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --font-body: "Inter", system-ui, sans-serif;
+        --font-label: "JetBrains Mono", ui-monospace, monospace;
+        --tracking: 0.38em;
+        --radius: 0;
+        --texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)' opacity='0.10'/%3E%3C/svg%3E");
+      }
+
+      /* --- Base --------------------------------------------------------- */
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: dark;
+        --gut: clamp(1.25rem, 5vw, 4rem);
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 1.05rem;
+        line-height: 1.65;
+        transition: background-color 0.25s ease, color 0.25s ease;
+      }
+
+      /* Per-theme grain. Sits above the page, below nothing interactive. */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        pointer-events: none;
+        background-image: var(--texture);
+        mix-blend-mode: screen;
+      }
+
+      .wrap {
+        max-width: 68rem;
+        margin: 0 auto;
+        padding-inline: var(--gut);
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      a:hover,
+      a:focus-visible {
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.2em;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: 1000;
+        background: var(--accent);
+        color: var(--accent-ink);
+        padding: 0.75rem 1.25rem;
+        font-family: var(--font-label);
+        font-weight: 700;
+      }
+
+      .skip:focus {
+        left: 0;
+      }
+
+      /* Shared label treatment. Every eyebrow on the page uses this. */
+      .label {
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: var(--tracking);
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0;
+      }
+
+      /* --- Nav ---------------------------------------------------------- */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 600;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav__inner {
+        max-width: 68rem;
+        margin: 0 auto;
+        padding: 0.85rem var(--gut);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .nav__mark {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .nav__mark:hover,
+      .nav__mark:focus-visible {
+        color: var(--accent);
+      }
+
+      /* --- Theme picker ------------------------------------------------- */
+      .no-js .picker {
+        display: none;
+      }
+
+      .picker {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .picker__label {
+        font-family: var(--font-label);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: var(--tracking);
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .picker__select {
+        font-family: var(--font-label);
+        font-size: 0.82rem;
+        color: var(--text);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.45rem 0.7rem;
+        cursor: pointer;
+      }
+
+      .picker__select:hover {
+        border-color: var(--accent);
+      }
+
+      /* --- Hero --------------------------------------------------------- */
+      .hero {
+        padding-block: clamp(3.5rem, 10vw, 7rem);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.6rem, 8vw, 5rem);
+        line-height: 1.02;
+        margin: 1rem 0 1.25rem;
+        color: var(--text);
+      }
+
+      .hero p {
+        max-width: 34rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.12rem;
+      }
+
+      /* --- World cards -------------------------------------------------- */
+      .worlds {
+        padding-block: clamp(3rem, 8vw, 5.5rem);
+      }
+
+      .worlds__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+        gap: 1.25rem;
+        margin-top: 2.5rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .world {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        transition: border-color 0.2s ease, transform 0.2s ease;
+      }
+
+      .world:hover,
+      .world:focus-within {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .world h3 {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        line-height: 1.15;
+        margin: 0.15rem 0 0.35rem;
+        color: var(--text);
+      }
+
+      /* Stretch the heading's link across the card so the whole tile is
+         clickable, without adding a second redundant link for AT. */
+      .world h3 a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .world h3 a::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--radius);
+      }
+
+      .world h3 a:hover,
+      .world h3 a:focus-visible {
+        color: var(--accent);
+      }
+
+      .world dl {
+        margin: 0;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.15rem 0.75rem;
+        font-size: 0.9rem;
+      }
+
+      .world dt {
+        font-family: var(--font-label);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-top: 0.35em;
+      }
+
+      .world dd {
+        margin: 0;
+        color: var(--text);
+      }
+
+      .status {
+        align-self: flex-start;
+        font-family: var(--font-label);
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.55rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+
+      .status--live {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      /* --- Colophon ----------------------------------------------------- */
+      .colophon {
+        padding-block: clamp(3rem, 8vw, 5rem);
+        border-top: 1px solid var(--line);
+      }
+
+      .colophon h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        line-height: 1.1;
+        margin: 1rem 0 1rem;
+      }
+
+      .colophon p {
+        max-width: 40rem;
+        color: var(--muted);
+      }
+
+      .colophon code {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.85em;
+        color: var(--text);
+      }
+
+      /* --- Footer ------------------------------------------------------- */
+      .site-footer {
+        border-top: 1px solid var(--line);
+        padding: 2.5rem var(--gut) 0;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .site-footer a {
+        color: var(--accent);
+      }
+
+      .disclaimer-bar {
+        margin-top: 2rem;
+        padding: 1rem var(--gut);
+        border-top: 1px solid var(--line);
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        line-height: 1.7;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+        }
+
+        .world:hover,
+        .world:focus-within {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+      <nav class="nav" aria-label="Main">
+        <div class="nav__inner">
+          <a class="nav__mark" href="{{ '/' | relative_url }}">{{ site.author }}</a>
+
+          <div class="picker">
+            <label class="picker__label" for="theme-select">Theme</label>
+            <select id="theme-select" class="picker__select">
+              <option value="default">Default</option>
+              <option value="metalhead">Metalhead</option>
+              <option value="baroque">Baroque</option>
+              <option value="modern-gothic">Modern Gothic</option>
+              <option value="horror">Horror</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <p class="label">Design Portfolio</p>
+          <h1>Design Worlds</h1>
+          <p>Seven visual identities for audiences that notice. Change the theme in the
+            navbar. The layout stays. Everything else moves.</p>
+        </div>
+      </section>
+
+      <section class="worlds" aria-labelledby="worlds-h">
+        <div class="wrap">
+          <p class="label">The Catalogue</p>
+          <h2 id="worlds-h" class="visually-hidden">Design worlds</h2>
+
+          <ul class="worlds__grid">
+            <li class="world">
+              <span class="status status--live">Live</span>
+              <h3><a href="{{ '/portfolio/metalhead/' | relative_url }}">Metalhead</a></h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Music and brand fans</dd>
+                <dt>Driver</dt>
+                <dd>Impact and contrast</dd>
+              </dl>
+            </li>
+
+            <li class="world">
+              <span class="status">Building</span>
+              <h3>Baroque</h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Luxury and high-end</dd>
+                <dt>Driver</dt>
+                <dd>Opulence and detail</dd>
+              </dl>
+            </li>
+
+            <li class="world">
+              <span class="status">Building</span>
+              <h3>Modern Gothic</h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Fashion and alternative</dd>
+                <dt>Driver</dt>
+                <dd>Mood and texture</dd>
+              </dl>
+            </li>
+
+            <li class="world">
+              <span class="status">Building</span>
+              <h3>Horror</h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Gaming and film</dd>
+                <dt>Driver</dt>
+                <dd>Atmosphere</dd>
+              </dl>
+            </li>
+
+            <li class="world">
+              <span class="status">Planned</span>
+              <h3>Tattoo Artist</h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Creators and artists</dd>
+                <dt>Driver</dt>
+                <dd>Linework and craft</dd>
+              </dl>
+            </li>
+
+            <li class="world">
+              <span class="status">Planned</span>
+              <h3>Steampunk</h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Not yet scoped</dd>
+                <dt>Driver</dt>
+                <dd>Not yet scoped</dd>
+              </dl>
+            </li>
+
+            <li class="world">
+              <span class="status">Planned</span>
+              <h3>Sci-Fi</h3>
+              <dl>
+                <dt>For</dt>
+                <dd>Not yet scoped</dd>
+                <dt>Driver</dt>
+                <dd>Not yet scoped</dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="colophon" aria-labelledby="colophon-h">
+        <div class="wrap">
+          <p class="label">Colophon</p>
+          <h2 id="colophon-h">How the switch works</h2>
+          <p>Every theme is thirteen custom properties on one
+            <code>[data-theme]</code> block. Grounds, ink, accent, three type
+            stacks, tracking, radius, texture. No component in this stylesheet
+            knows a theme by name, so adding one touches three places and breaks
+            nothing.
+          </p>
+          <p>Your choice is saved locally and restored before the first paint, so
+            the page never flashes the wrong world. Each theme is contrast-checked
+            on its own tokens, not on an average.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author }}.
+        <a href="{{ site.github_url }}" rel="noopener noreferrer">GitHub</a>
+      </p>
+      <div class="disclaimer-bar">
+        Not legal advice &middot; Not mental health advice &middot; For educational and
+        informational purposes only &middot; Mention of any individual, organization, or
+        institution does not imply their endorsement or approval
+      </div>
+    </footer>
+
+    <p class="visually-hidden" role="status" aria-live="polite" id="theme-status"></p>
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var sel = document.getElementById('theme-select');
+        var status = document.getElementById('theme-status');
+
+        sel.value = root.getAttribute('data-theme') || 'default';
+
+        sel.addEventListener('change', function () {
+          root.setAttribute('data-theme', sel.value);
+          status.textContent = sel.options[sel.selectedIndex].text + ' theme applied.';
+          try {
+            localStorage.setItem('portfolio-theme', sel.value);
+          } catch (e) { /* private mode: choice just will not persist */ }
+        });
+      })();
+    </script>
+  </body>
+
+</html>
